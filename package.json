@@ -1,0 +1,17 @@
+{
+  "name": "volt-buyback",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bignumber.js": "^9.0.1",
+    "dotenv": "^10.0.0",
+    "meterify": "^1.4.6",
+    "web3": "1.2.11"
+  }
+}
