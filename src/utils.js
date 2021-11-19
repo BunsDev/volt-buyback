@@ -35,6 +35,13 @@ const enableAccount = (web3) => {
   return acct.address;
 };
 
+const voltBalanceOf = async (holderAddr) => {
+  const web3 = loadWeb3();
+  const inst = new web3.eth.Contract(erc20safeABI, volt);
+  const balance = await inst.methods.balanceOf(holderAddr).call({});
+  return new BigNumber(balance).toFixed();
+};
+
 const calcReceivedVolt = async (txHash) => {
   const web3 = loadWeb3();
   const transferEvtABI = erc20safeABI.filter((c) => c.name === 'Transfer' && c.type === 'event')[0];
@@ -101,4 +108,5 @@ module.exports = {
   sendBuybackTx,
   calcReceivedVolt,
   fundGeyser,
+  voltBalanceOf,
 };
