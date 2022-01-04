@@ -1,4 +1,4 @@
 #!/bin/bash
 
 TIMESTAMP=`date "+%Y%m%d"`
-npm start >> "./log/buyback-${TIMESTAMP}.log"
+npm start >> "./log/meter-${TIMESTAMP}.log"

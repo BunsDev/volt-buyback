@@ -25,7 +25,7 @@ const { sendBuybackTx, calcReceivedVolt, fundGeyser } = require('./utils');
     }
 
     // fund geyser
-    const duration = 3600 * 24 * 7; // 7days in seconds
+    const duration = 3600 * 24 * 30; // 30days in seconds
     await fundGeyser(rcvdVOLT, duration);
   } catch (e) {
     console.log('Error Happened: ', e);

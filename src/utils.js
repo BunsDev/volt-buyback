@@ -6,24 +6,10 @@ const geyserABI = require('./abi/geyser.json').abi;
 const Web3 = require('web3');
 const meterify = require('meterify').meterify;
 const BigNumber = require('bignumber.js');
-const {
-  volt,
-  voltmakerAddr,
-  voltHolder,
-  voltStakingGeyser,
-  mtrg,
-  busd,
-  weth,
-  usdc,
-  wbtc,
-  bnb,
-  meter,
-  usdt,
-  movr,
-} = require('./const');
+const { metermain } = require('./const');
 
 const loadWeb3 = () => {
-  const web3 = meterify(new Web3(), 'http://mainnet.meter.io');
+  const web3 = meterify(new Web3(), metermain.rpcUrl);
   return web3;
 };
 
@@ -37,7 +23,7 @@ const enableAccount = (web3) => {
 
 const voltBalanceOf = async (holderAddr) => {
   const web3 = loadWeb3();
-  const inst = new web3.eth.Contract(erc20safeABI, volt);
+  const inst = new web3.eth.Contract(erc20safeABI, metermain.volt);
   const balance = await inst.methods.balanceOf(holderAddr).call({});
   return new BigNumber(balance).toFixed();
 };
@@ -56,7 +42,7 @@ const calcReceivedVolt = async (txHash) => {
         const { from, to, value } = decoded;
         const fromAddr = from.toLowerCase();
         const toAddr = to.toLowerCase();
-        if (e.address.toLowerCase() === volt && toAddr === voltHolder.toLowerCase()) {
+        if (e.address.toLowerCase() === metermain.volt && toAddr === metermain.voltHolder.toLowerCase()) {
           // incoming VOLT
           total = total.plus(value);
           console.log('VALUE: ', value);
@@ -77,11 +63,41 @@ const calcReceivedVolt = async (txHash) => {
 const sendBuybackTx = async () => {
   const web3 = loadWeb3();
   const ownerAddr = enableAccount(web3);
-  const voltmakerInst = new web3.eth.Contract(voltmakerABI, voltmakerAddr);
+  const voltmakerInst = new web3.eth.Contract(voltmakerABI, metermain.voltmakerAddr);
   const buybackReceipt = await voltmakerInst.methods
     .convertMultiple(
-      [busd, busd, weth, mtrg, mtrg, weth, mtrg, mtrg, mtrg, mtrg, mtrg, mtrg, weth, meter],
-      [usdc, weth, wbtc, weth, busd, bnb, volt, usdc, meter, bnb, usdt, movr, volt, usdc]
+      [
+        metermain.busd,
+        metermain.busd,
+        metermain.weth,
+        metermain.mtrg,
+        metermain.mtrg,
+        metermain.weth,
+        metermain.mtrg,
+        metermain.mtrg,
+        metermain.mtrg,
+        metermain.mtrg,
+        metermain.mtrg,
+        metermain.mtrg,
+        metermain.weth,
+        metermain.meter,
+      ],
+      [
+        metermain.usdc,
+        metermain.weth,
+        metermain.wbtc,
+        metermain.weth,
+        metermain.busd,
+        metermain.bnb,
+        metermain.volt,
+        metermain.usdc,
+        metermain.meter,
+        metermain.bnb,
+        metermain.usdt,
+        metermain.movr,
+        metermain.volt,
+        metermain.usdc,
+      ]
     )
     .send({ from: ownerAddr });
   return buybackReceipt;
@@ -90,15 +106,15 @@ const sendBuybackTx = async () => {
 const fundGeyser = async (amount, duration) => {
   const web3 = loadWeb3();
   const ownerAddr = enableAccount(web3);
-  const geyserInst = new web3.eth.Contract(geyserABI, voltStakingGeyser);
+  const geyserInst = new web3.eth.Contract(geyserABI, metermain.voltStakingGeyser);
   const data = await geyserInst.methods.getGeyserData().call();
   const { rewardToken: rewardTokenAddress } = data;
-  const voltInst = new web3.eth.Contract(erc20safeABI, volt);
+  const voltInst = new web3.eth.Contract(erc20safeABI, metermain.volt);
 
   console.log('reward token:', rewardTokenAddress);
-  console.log('amount in wei:', amount);
+  console.log('amount in wei:', amount.toFixed());
   console.log('duration:', duration, 'seconds');
-  const ar = await voltInst.methods.approve(voltStakingGeyser, amount).send({ from: ownerAddr });
+  const ar = await voltInst.methods.approve(metermain.voltStakingGeyser, amount).send({ from: ownerAddr });
   console.log('approve receipt:', ar);
   const fr = await geyserInst.methods.fundGeyser(amount, duration).send({ from: ownerAddr });
   console.log('fundGeyser receipt:', fr);
