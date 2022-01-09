@@ -9,14 +9,18 @@ const {
   getFactory,
   getBridge,
   bulkCalcReceivedVolt,
+  getValidPairs,
 } = require('./utilsOnTheta');
 const BigNumber = require('bignumber.js');
 
 (async () => {
   try {
+    const pairs = await getValidPairs();
+    console.log('Valid Pairs: ', pairs);
+
     // send buyback tx
     // const f = await getFactory();
-    const receipt = await sendBuybackTx();
+    const receipt = await sendBuybackTx(pairs);
     console.log('Buyback Tx: ', receipt.transactionHash);
     if (!receipt || !receipt.transactionHash) {
       console.log('Invalid buyback receipt, end early');

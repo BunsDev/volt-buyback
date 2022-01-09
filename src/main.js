@@ -1,12 +1,15 @@
 //The periodical call method, contract's address is 0xEd70BbE825D9ef3260cB31c60c2639aEEf90Dacd
 
 require('dotenv').config();
-const { sendBuybackTx, calcReceivedVolt, fundGeyser } = require('./utils');
+const { sendBuybackTx, calcReceivedVolt, fundGeyser, getValidPairs } = require('./utils');
 
 (async () => {
   try {
+    const pairs = await getValidPairs();
+    console.log('Valid Pairs: ', pairs);
+
     // send buyback tx
-    const receipt = await sendBuybackTx();
+    const receipt = await sendBuybackTx(pairs);
     console.log('Buyback Tx: ', receipt.transactionHash);
     if (!receipt || !receipt.transactionHash) {
       console.log('Invalid buyback receipt, end early');

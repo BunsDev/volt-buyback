@@ -16,6 +16,26 @@ module.exports = {
 
     voltHolder: '0x1d18c6fca6817175fff59763a36ac03ca9755165',
     voltStakingGeyser: '0xBfC69a757Dd7DB8C59e10c63aB023dc8c8cc95Dc',
+
+    uniswapv2Factory: '0x56aD9A9149685b290ffeC883937caE191e193135',
+    pairs: [
+      ['busd', 'usdc'],
+      ['busd', 'weth'],
+      ['busd', 'usdt'],
+      ['weth', 'wbtc'],
+      ['mtrg', 'weth'],
+      ['mtrg', 'busd'],
+      ['weth', 'bnb'],
+      ['mtrg', 'volt'],
+      ['mtrg', 'usdc'],
+      ['mtrg', 'meter'],
+      ['mtrg', 'bnb'],
+      ['mtrg', 'usdt'],
+      ['mtrg', 'movr'],
+      ['weth', 'volt'],
+      ['meter', 'usdc'],
+      ['busd', 'volt'],
+    ],
   },
   thetamain: {
     rpcUrl: 'http://54.169.171.97:18888/rpc',
@@ -31,5 +51,18 @@ module.exports = {
 
     voltHolder: '0x1d18c6fca6817175fff59763a36ac03ca9755165',
     voltStakingGeyser: '0xCd872033f3Ed9227BC78F47fB0E0DFf7dbDBE5B4',
+
+    uniswapv2Factory: '0xa2De4F2cC54dDFdFb7D27E81b9b9772bd45bf89d',
+
+    pairs: [
+      ['tfuel', 'volt'],
+      ['tfuel', 'busd'],
+      ['tfuel', 'bnb'],
+      ['usdc', 'tfuel'],
+      ['usdc', 'busd'],
+      ['tfuel', 'mtrg'],
+      ['busd', 'volt'],
+      ['weth', 'tfuel'],
+    ],
   },
 };
