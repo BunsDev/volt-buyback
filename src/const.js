@@ -48,6 +48,7 @@ module.exports = {
     mtrg: '0xbd2949f67dcdc549c6ebe98696449fa79d988a9f',
     weth: '0x3674d64aab971ab974b2035667a4b3d09b5ec2b3',
     bnb: '0xdff772186ace9b5513fb46d7b05b36efa0a4a20d',
+    tdrop: '0x1336739b05c7ab8a526d40dcc0d04a826b5f8b03',
 
     voltHolder: '0x1d18c6fca6817175fff59763a36ac03ca9755165',
     voltStakingGeyser: '0xCd872033f3Ed9227BC78F47fB0E0DFf7dbDBE5B4',
@@ -63,6 +64,8 @@ module.exports = {
       ['tfuel', 'mtrg'],
       ['busd', 'volt'],
       ['weth', 'tfuel'],
+      ['tdrop', 'tfuel'],
+      ['tdrop', 'volt'],
     ],
   },
 };
