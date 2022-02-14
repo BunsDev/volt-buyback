@@ -1,4 +1,4 @@
 #!/bin/bash
 
 TIMESTAMP=`date "+%Y%m%d"`
-npm start >> "./log/theta-${TIMESTAMP}.log"
+npm run theta >> "./log/theta-${TIMESTAMP}.log"
