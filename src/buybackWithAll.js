@@ -1,6 +1,6 @@
 //The periodical call method, contract's address is 0xEd70BbE825D9ef3260cB31c60c2639aEEf90Dacd
 require('dotenv').config();
-const { voltHolder } = require('./const');
+const { voltHolder } = require('./const').metermain;
 const { sendBuybackTx, calcReceivedVolt, fundGeyser, voltBalanceOf } = require('./utils');
 
 (async () => {
