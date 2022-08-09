@@ -38,7 +38,7 @@ module.exports = {
     ],
   },
   thetamain: {
-    rpcUrl: 'http://54.169.171.97:18888/rpc',
+    rpcUrl: 'https://eth-rpc-api.thetatoken.org/rpc',
 
     voltmakerAddr: '0x2d653C23d1C23e021FB756774EB9519f107F0349',
     tfuel: '0x4dc08b15ea0e10b96c41aec22fab934ba15c983e',
